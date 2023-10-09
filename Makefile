@@ -86,36 +86,36 @@ NAME = libft.a
 INC = inc
 HEADER = libft.h
 
-.SILENT:
+# .SILENT:
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
-	printf "$(GREEN)$(NAME) done$(NC)\n"
 
 clean:
-	$(RM) $(OBJ_DIR)
-	printf "$(RED)Deleted objects$(NC)\n"
+	@$(RM) $(OBJ_DIR)
+	@printf "$(RED)Deleted objects$(NC)\n"
 
 fclean: clean
-	$(RM) $(NAME)
-	printf "$(RED)Deleted $(NAME)$(NC)\n"
+	@$(RM) $(NAME)
+	@printf "$(RED)Deleted $(NAME)$(NC)\n"
 
 re:
-	printf "$(YELLOW)Rebuilding...$(NC)\n"
-	$(MAKE) --no-print-directory fclean
-	$(MAKE) --no-print-directory all
+	@printf "$(YELLOW)Rebuilding...$(NC)\n"
+	@$(MAKE) --no-print-directory fclean
+	@$(MAKE) --no-print-directory all
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIRS)
-	printf "\r\033[K"
-	printf "$(YELLOW)Compiling $(GREEN)$$(($(COUNT) * 100 / $(TOTAL_FILES)))%%$(NC) - $<\r"
-	$(CC) $(COMPILER_FLAGS) -I$(INC) -c $< -o $@
-	$(eval COUNT=$(shell echo $$(($(COUNT) + 1))))
+	@printf "\r\033[K"
+	@printf "$(YELLOW)Compiling $(GREEN)$$(($(COUNT) * 100 / $(TOTAL_FILES)))%%$(NC) - $<\r"
+	@$(CC) $(COMPILER_FLAGS) -I$(INC) -c $< -o $@
+	@$(eval COUNT=$(shell echo $$(($(COUNT) + 1))))
 
 $(NAME): $(OBJ) $(INC)/$(HEADER)
-	printf "\r\033[K"
-	$(ARCHIVE) $(NAME) $^
-	printf "$(GREEN)Archive created.$(NC)\n"
+	@printf "\r\033[K"
+	@$(ARCHIVE) $(NAME) $^
+	@printf "$(GREEN)Archive created.$(NC)\n"
+	@printf "$(GREEN)$(NAME) done$(NC)\n"
 
 $(OBJ_DIRS):
 	@mkdir -p $@
